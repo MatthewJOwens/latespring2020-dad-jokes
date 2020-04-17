@@ -1,5 +1,5 @@
 <template>
-<div class="about">
+<div class="profileDetails">
   <div class="text-center">
     <h1>Welcome {{ profile.name }}</h1>
     <img class="rounded" :src="profile.picture" alt="" />
@@ -13,24 +13,35 @@
   </div>
 </template>
 
+
 <script>
 import Joke from "../components/Joke";
 
 export default {
-  name: "Profile",
+  name: 'profileDetails',
+
+  data(){
+    return {}
+  },
+  mounted() {
+    this.$store.dispatch("getJokesByEmail", this.profile.email)
+   
+  }, 
   computed: {
     profile() {
-      return this.$store.state.profile;
-    }
-  },
-    mounted() {
+      return this.$store.state.activeProfile;
+    },
+    jokes() { return this.$store.state.profileJokes}
 
+  },
+  methods:{},
+  components:{
+    Joke,
+  },
   }
-};
 </script>
 
+
 <style scoped>
-img {
-  max-width: 100px;
-}
+
 </style>

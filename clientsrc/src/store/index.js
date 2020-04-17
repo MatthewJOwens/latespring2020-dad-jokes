@@ -18,14 +18,23 @@ let api = Axios.create({
 export default new Vuex.Store({
   state: {
     profile: {},
+    activeProfile: {},
+    profileJokes: [],
     jokes: []
   },
   mutations: {
     setProfile(state, profile) {
       state.profile = profile;
     },
+    setActiveProfile(state, profile) {
+      state.activeProfile = profile;      
+    },
     setJokes(state, jokes) {
       state.jokes = jokes
+    },
+
+    setProfileJokes(state, jokes) {
+      state.profileJokes = jokes
     }
   },
   actions: {
@@ -56,6 +65,16 @@ export default new Vuex.Store({
       try {
         let res = await api.get('jokes')
         commit('setJokes', res.data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async getJokesByEmail({ commit, dispatch }, email) {
+      try {
+        let res = await api.get('profile/' + email + "/jokes")
+        commit('setProfileJokes', res.data)
+        console.log(res.data);
+        
       } catch (error) {
         console.error(error)
       }

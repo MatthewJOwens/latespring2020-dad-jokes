@@ -25,6 +25,12 @@ const routes = [
     name: "Profile",
     component: Profile,
     beforeEnter: authGuard
+  },
+  {
+    path: "/profile/:email",
+    name: "ProfileDetails",
+    // @ts-ignore
+    component: () => import(/*webpackChunkName: "profile-details" */'../views/ProfileDetails.vue')
   }
 ];
 

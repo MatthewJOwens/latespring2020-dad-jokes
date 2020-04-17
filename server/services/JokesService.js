@@ -7,7 +7,7 @@ class JokesService {
   }
 
   async findAll(query = {}) {
-    let jokes = await dbContext.Jokes.find(query).populate("creator", "name picture");
+    let jokes = await dbContext.Jokes.find(query).populate("creator", "name picture email",);
     return jokes;
   }
 
